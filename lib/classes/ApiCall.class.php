@@ -30,14 +30,16 @@ class ApiCall
         $this->curl = curl_init();
 
         if (!empty($data)) {
-            if (!$dataViaGet) {
+            if (!$dataViaGET) {
                 curl_setopt($this->curl, CURLOPT_POST, 1);
                 curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($data));
                 curl_setopt($this->curl, CURLOPT_URL, $url);
             } elseif ($dataViaGET) {
-                $query = http_build_query($params);
-                curl_setopt($ch, CURLOPT_URL, "{$url}?{$query}");
+                $query = http_build_query($data);
+                curl_setopt($this->curl, CURLOPT_URL, "{$url}?{$query}");
             }
+        } else {
+          curl_setopt($this->curl, CURLOPT_URL, $url);
         }
 
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
@@ -59,7 +61,7 @@ class ApiCall
     public function getResponse(): String
     {
         // Remove header from response
-        $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $headerSize = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
         $response = substr($this->response, $headerSize);
 
         return $response;
@@ -88,7 +90,7 @@ class ApiCall
     public function getHeader(): array
     {
         $headerSize = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
-        $header = substr(($this->response, 0, $headerSize);
+        $header = substr($this->response, 0, $headerSize);
         $headers = array();
         $arrRequests = explode("\r\n\r\n", $header);
         for ($index = 0; $index < count($arrRequests) -1; $index++) {
