@@ -1,5 +1,5 @@
 {
-    "name": "ezrarieben/ApiCall",
+    "name": "ezrarieben/api-call",
     "type": "library",
     "description": "A simple PHP class to interact with RESTful APIs",
     "keywords": ["API", "REST", "RESTful", "interaction"],
