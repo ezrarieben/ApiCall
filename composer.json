@@ -1,0 +1,20 @@
+{
+    "name": "ezrarieben/ApiCall",
+    "type": "library",
+    "description": "A simple PHP class to interact with RESTful APIs",
+    "keywords": ["API", "REST", "RESTful", "interaction"],
+    "homepage": "https://github.com/ezrarieben/ApiCall",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ezra Rieben",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+    },
+    "autoload": {
+	"files": ["ApiCall.php"]
+    }
+}
